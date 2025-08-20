@@ -1,0 +1,803 @@
+{
+  "tools": [
+    {
+      "id": "code-generator",
+      "name": "Code Generator",
+      "description": "Generate or improve code with AI assistance for any programming language.",
+      "categories": ["Development"],
+      "providers": ["OpenAI", "Anthropic", "Google", "Mistral", "Meta", "Cohere", "Groq", "Perplexity"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet", "Claude 3 Haiku"],
+        "Google": ["Gemini Ultra", "Gemini Pro", "Gemini Flash"],
+        "Mistral": ["Mistral Large", "Mixtral-8x7B", "Mistral Medium"],
+        "Meta": ["LLaMA 3 70B", "LLaMA 3 8B", "Code Llama"],
+        "Cohere": ["Command R+", "Command R", "Command"],
+        "Groq": ["Mixtral-8x7B", "LLaMA 3 70B", "Gemma 7B"],
+        "Perplexity": ["Sonar Large", "Sonar Medium", "Codestral"]
+      },
+      "agents": ["Bolt", "Lovable", "Replit", "Cursor", "Copilot", "Tabnine"],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": true,
+      "fileUploadRules": {
+        "allowedTypes": [".py", ".js", ".ts", ".cpp", ".java", ".json", ".md", ".html", ".css", ".sql", ".yaml", ".xml"],
+        "maxSizeMB": 20
+      },
+      "outputFormats": {
+        "options": ["Text", "JSON", "Markdown"],
+        "defaultFormat": "Text"
+      }
+    },
+    {
+      "id": "image-generator",
+      "name": "Image Prompt Generator",
+      "description": "Generate creative and detailed prompts for AI image generation tools.",
+      "categories": ["Creativity", "Design"],
+      "providers": ["OpenAI", "Stability AI", "Midjourney", "Runway", "Adobe Firefly"],
+      "models": {
+        "OpenAI": ["DALL·E 3", "DALL·E 2"],
+        "Stability AI": ["Stable Diffusion XL", "Stable Diffusion 3", "SDXL Turbo"],
+        "Midjourney": ["Midjourney v6", "Midjourney v5.2", "Niji v6"],
+        "Runway": ["Runway Gen-2", "Runway Gen-3", "Runway ML"],
+        "Adobe Firefly": ["Firefly 2", "Firefly 1"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".png", ".jpg", ".jpeg", ".webp", ".gif"],
+        "maxSizeMB": 15
+      },
+      "outputFormats": {
+        "options": ["Text", "JSON", "Markdown"],
+        "defaultFormat": "Text"
+      }
+    },
+    {
+      "id": "text-generator",
+      "name": "Text/Writing Prompt Generator",
+      "description": "Generate or refine written content prompts for any writing task.",
+      "categories": ["Writing", "General"],
+      "providers": ["OpenAI", "Anthropic", "Google", "Mistral", "Cohere"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet", "Claude 3 Opus"],
+        "Google": ["Gemini Pro", "Gemini Ultra", "PaLM 2"],
+        "Mistral": ["Mistral Large", "Mistral Medium", "Mistral Small"],
+        "Cohere": ["Command R+", "Command R", "Command"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".txt", ".docx", ".pdf", ".md", ".rtf"],
+        "maxSizeMB": 20
+      },
+      "outputFormats": {
+        "options": ["Markdown", "Text", "PDF", "HTML"],
+        "defaultFormat": "Markdown"
+      }
+    },
+    {
+      "id": "caption-generator",
+      "name": "Social Caption Generator",
+      "description": "Generate engaging captions for Facebook, Instagram, LinkedIn, and Twitter/X.",
+      "categories": ["Marketing", "Social Media"],
+      "providers": ["OpenAI", "Anthropic", "Google", "Cohere"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Google": ["Gemini Pro", "Gemini Flash"],
+        "Cohere": ["Command R+", "Command R"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".txt", ".csv", ".json", ".png", ".jpg", ".jpeg"],
+        "maxSizeMB": 10
+      },
+      "outputFormats": {
+        "options": ["Text", "Markdown", "JSON"],
+        "defaultFormat": "Text"
+      }
+    },
+    {
+      "id": "copywriting-generator",
+      "name": "Copywriting/Marketing Generator",
+      "description": "Create persuasive ad copy, slogans, and marketing content.",
+      "categories": ["Marketing"],
+      "providers": ["OpenAI", "Anthropic", "Cohere", "Google"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Cohere": ["Command R+", "Command R"],
+        "Google": ["Gemini Pro", "Gemini Ultra"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".txt", ".docx", ".pdf", ".csv"],
+        "maxSizeMB": 15
+      },
+      "outputFormats": {
+        "options": ["Text", "Markdown", "HTML", "JSON"],
+        "defaultFormat": "Text"
+      }
+    },
+    {
+      "id": "data-sql-generator",
+      "name": "Data/SQL Prompt Generator",
+      "description": "Generate SQL queries and data manipulation prompts with precision.",
+      "categories": ["Data", "Development"],
+      "providers": ["OpenAI", "Google", "Mistral", "Anthropic"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Google": ["Gemini Pro", "Gemini Ultra"],
+        "Mistral": ["Mistral Large", "Codestral"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".csv", ".xlsx", ".json", ".sql", ".db"],
+        "maxSizeMB": 25
+      },
+      "outputFormats": {
+        "options": ["SQL", "Text", "Markdown", "JSON"],
+        "defaultFormat": "SQL"
+      }
+    },
+    {
+      "id": "email-writer",
+      "name": "Email Writer",
+      "description": "Generate professional or casual emails for any purpose.",
+      "categories": ["Productivity", "Communication"],
+      "providers": ["OpenAI", "Anthropic", "Google", "Cohere"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Google": ["Gemini Pro", "Gemini Flash"],
+        "Cohere": ["Command R+", "Command R"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".txt", ".docx", ".pdf", ".eml"],
+        "maxSizeMB": 10
+      },
+      "outputFormats": {
+        "options": ["Text", "Markdown", "HTML"],
+        "defaultFormat": "Text"
+      }
+    },
+    {
+      "id": "blog-generator",
+      "name": "Blog Generator",
+      "description": "Generate comprehensive blog posts with SEO optimization and structure.",
+      "categories": ["Writing", "Marketing", "Content"],
+      "providers": ["OpenAI", "Anthropic", "Google", "Cohere"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet", "Claude 3 Opus"],
+        "Google": ["Gemini Pro", "Gemini Ultra"],
+        "Cohere": ["Command R+", "Command R"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".txt", ".docx", ".pdf", ".md", ".html"],
+        "maxSizeMB": 20
+      },
+      "outputFormats": {
+        "options": ["Markdown", "Text", "HTML", "PDF"],
+        "defaultFormat": "Markdown"
+      }
+    },
+    {
+      "id": "seo-helper",
+      "name": "SEO Helper",
+      "description": "Generate SEO-optimized meta titles, descriptions, and tags.",
+      "categories": ["Marketing", "SEO"],
+      "providers": ["OpenAI", "Cohere", "Google", "Anthropic"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Cohere": ["Command R+", "Command R"],
+        "Google": ["Gemini Pro", "Gemini Flash"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".csv", ".xlsx", ".json", ".txt", ".html"],
+        "maxSizeMB": 10
+      },
+      "outputFormats": {
+        "options": ["CSV", "JSON", "Text", "Markdown"],
+        "defaultFormat": "CSV"
+      }
+    },
+    {
+      "id": "video-script-generator",
+      "name": "Video Script Generator",
+      "description": "Generate engaging scripts for YouTube, TikTok, ads, or educational videos.",
+      "categories": ["Media", "Marketing", "Content"],
+      "providers": ["OpenAI", "Anthropic", "Google", "Cohere"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Google": ["Gemini Pro", "Gemini Ultra"],
+        "Cohere": ["Command R+", "Command R"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".txt", ".docx", ".pdf", ".srt"],
+        "maxSizeMB": 15
+      },
+      "outputFormats": {
+        "options": ["Text", "Markdown", "PDF", "SRT"],
+        "defaultFormat": "Markdown"
+      }
+    },
+    {
+      "id": "resume-builder",
+      "name": "Resume Builder",
+      "description": "Generate professional resumes and cover letters tailored to job descriptions.",
+      "categories": ["Productivity", "Career"],
+      "providers": ["OpenAI", "Anthropic", "Google"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Google": ["Gemini Pro", "Gemini Ultra"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".docx", ".pdf", ".txt", ".json"],
+        "maxSizeMB": 15
+      },
+      "outputFormats": {
+        "options": ["PDF", "Word", "Markdown", "Text"],
+        "defaultFormat": "PDF"
+      }
+    },
+    {
+      "id": "lesson-plan-generator",
+      "name": "Lesson Plan Generator",
+      "description": "Generate structured lesson plans for educators and trainers.",
+      "categories": ["Education"],
+      "providers": ["OpenAI", "Anthropic", "Google"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Google": ["Gemini Pro", "Gemini Ultra"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".pdf", ".docx", ".txt", ".pptx"],
+        "maxSizeMB": 15
+      },
+      "outputFormats": {
+        "options": ["Markdown", "PDF", "Text", "Word"],
+        "defaultFormat": "Markdown"
+      }
+    },
+    {
+      "id": "quiz-generator",
+      "name": "Quiz Generator",
+      "description": "Create interactive quizzes, MCQs, and assessments from any content.",
+      "categories": ["Education", "Learning"],
+      "providers": ["OpenAI", "Anthropic", "Google"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Google": ["Gemini Pro", "Gemini Ultra"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".pdf", ".docx", ".txt", ".pptx"],
+        "maxSizeMB": 10
+      },
+      "outputFormats": {
+        "options": ["JSON", "Markdown", "Text", "HTML"],
+        "defaultFormat": "JSON"
+      }
+    },
+    {
+      "id": "research-summarizer",
+      "name": "Research Summarizer",
+      "description": "Summarize academic papers, research documents, and reports.",
+      "categories": ["Education", "Research"],
+      "providers": ["OpenAI", "Anthropic", "Google"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet", "Claude 3 Opus"],
+        "Google": ["Gemini Ultra", "Gemini Pro"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".pdf", ".docx", ".txt", ".md", ".rtf"],
+        "maxSizeMB": 25
+      },
+      "outputFormats": {
+        "options": ["Markdown", "Text", "JSON", "PDF"],
+        "defaultFormat": "Markdown"
+      }
+    },
+    {
+      "id": "academic-essay-writer",
+      "name": "Academic Essay Writer",
+      "description": "Generate structured academic essays and research papers.",
+      "categories": ["Education", "Writing"],
+      "providers": ["OpenAI", "Anthropic", "Google"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet", "Claude 3 Opus"],
+        "Google": ["Gemini Ultra", "Gemini Pro"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".docx", ".pdf", ".txt", ".md", ".bib"],
+        "maxSizeMB": 20
+      },
+      "outputFormats": {
+        "options": ["PDF", "Word", "Markdown", "LaTeX"],
+        "defaultFormat": "PDF"
+      }
+    },
+    {
+      "id": "study-notes-generator",
+      "name": "Study Notes Generator",
+      "description": "Generate structured study notes and summaries from learning materials.",
+      "categories": ["Education"],
+      "providers": ["OpenAI", "Anthropic", "Google"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Google": ["Gemini Pro", "Gemini Ultra"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".pdf", ".docx", ".txt", ".pptx"],
+        "maxSizeMB": 15
+      },
+      "outputFormats": {
+        "options": ["Markdown", "Text", "JSON", "PDF"],
+        "defaultFormat": "Markdown"
+      }
+    },
+    {
+      "id": "product-description-writer",
+      "name": "Product Description Writer",
+      "description": "Generate compelling product descriptions for e-commerce and catalogs.",
+      "categories": ["Marketing", "E-commerce"],
+      "providers": ["OpenAI", "Anthropic", "Google", "Cohere"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Google": ["Gemini Pro", "Gemini Flash"],
+        "Cohere": ["Command R+", "Command R"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".csv", ".json", ".txt", ".xlsx", ".png", ".jpg"],
+        "maxSizeMB": 10
+      },
+      "outputFormats": {
+        "options": ["Text", "Markdown", "JSON", "CSV"],
+        "defaultFormat": "Markdown"
+      }
+    },
+    {
+      "id": "sales-pitch-creator",
+      "name": "Sales Pitch Creator",
+      "description": "Generate persuasive sales pitches and elevator pitches.",
+      "categories": ["Marketing", "Business"],
+      "providers": ["OpenAI", "Anthropic", "Google", "Cohere"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Google": ["Gemini Pro", "Gemini Ultra"],
+        "Cohere": ["Command R+", "Command R"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".txt", ".docx", ".pdf", ".pptx"],
+        "maxSizeMB": 8
+      },
+      "outputFormats": {
+        "options": ["Text", "Markdown", "PDF", "PowerPoint"],
+        "defaultFormat": "Text"
+      }
+    },
+    {
+      "id": "press-release-writer",
+      "name": "Press Release Writer",
+      "description": "Generate professional press releases and media announcements.",
+      "categories": ["Business", "Marketing", "PR"],
+      "providers": ["OpenAI", "Anthropic", "Google"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Google": ["Gemini Pro", "Gemini Ultra"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".txt", ".docx", ".pdf"],
+        "maxSizeMB": 15
+      },
+      "outputFormats": {
+        "options": ["Text", "Markdown", "PDF", "Word"],
+        "defaultFormat": "Markdown"
+      }
+    },
+    {
+      "id": "landing-page-copywriter",
+      "name": "Landing Page Copywriter",
+      "description": "Generate high-converting landing page copy and content.",
+      "categories": ["Marketing", "Web"],
+      "providers": ["OpenAI", "Anthropic", "Google", "Cohere"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Google": ["Gemini Pro", "Gemini Ultra"],
+        "Cohere": ["Command R+", "Command R"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".txt", ".docx", ".html", ".json"],
+        "maxSizeMB": 12
+      },
+      "outputFormats": {
+        "options": ["HTML", "Markdown", "Text", "JSON"],
+        "defaultFormat": "HTML"
+      }
+    },
+    {
+      "id": "twitter-thread-generator",
+      "name": "Twitter Thread Generator",
+      "description": "Generate engaging multi-post threads for Twitter/X.",
+      "categories": ["Social Media", "Marketing"],
+      "providers": ["OpenAI", "Anthropic", "Google", "Cohere"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Google": ["Gemini Pro", "Gemini Flash"],
+        "Cohere": ["Command R+", "Command R"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".txt", ".json", ".csv"],
+        "maxSizeMB": 5
+      },
+      "outputFormats": {
+        "options": ["Text", "JSON", "Markdown"],
+        "defaultFormat": "Text"
+      }
+    },
+    {
+      "id": "linkedin-post-generator",
+      "name": "LinkedIn Post Generator",
+      "description": "Generate professional LinkedIn posts and articles.",
+      "categories": ["Social Media", "Professional"],
+      "providers": ["OpenAI", "Anthropic", "Google", "Cohere"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Google": ["Gemini Pro", "Gemini Flash"],
+        "Cohere": ["Command R+", "Command R"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".txt", ".docx", ".pdf", ".json"],
+        "maxSizeMB": 8
+      },
+      "outputFormats": {
+        "options": ["Text", "Markdown", "JSON"],
+        "defaultFormat": "Text"
+      }
+    },
+    {
+      "id": "facebook-post-generator",
+      "name": "Facebook Post Generator",
+      "description": "Generate engaging Facebook posts and content.",
+      "categories": ["Social Media", "Marketing"],
+      "providers": ["OpenAI", "Anthropic", "Google", "Cohere"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Google": ["Gemini Pro", "Gemini Flash"],
+        "Cohere": ["Command R+", "Command R"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".txt", ".json", ".png", ".jpg", ".jpeg"],
+        "maxSizeMB": 10
+      },
+      "outputFormats": {
+        "options": ["Text", "Markdown", "JSON"],
+        "defaultFormat": "Text"
+      }
+    },
+    {
+      "id": "ad-copy-generator",
+      "name": "Ad Copy Generator",
+      "description": "Generate ad copy for Google, Facebook, TikTok, and other platforms.",
+      "categories": ["Marketing", "Advertising"],
+      "providers": ["OpenAI", "Anthropic", "Cohere", "Google"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Cohere": ["Command R+", "Command R"],
+        "Google": ["Gemini Pro", "Gemini Ultra"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".txt", ".csv", ".json", ".xlsx"],
+        "maxSizeMB": 10
+      },
+      "outputFormats": {
+        "options": ["Text", "JSON", "CSV", "Markdown"],
+        "defaultFormat": "Text"
+      }
+    },
+    {
+      "id": "unit-test-generator",
+      "name": "Unit Test Generator",
+      "description": "Generate comprehensive unit tests from code snippets and functions.",
+      "categories": ["Development", "Testing"],
+      "providers": ["OpenAI", "Anthropic", "Google", "Mistral"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Google": ["Gemini Pro", "Gemini Ultra"],
+        "Mistral": ["Mistral Large", "Codestral"]
+      },
+      "agents": ["Bolt", "Replit", "Cursor", "Lovable", "Copilot"],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": true,
+      "fileUploadRules": {
+        "allowedTypes": [".py", ".js", ".ts", ".java", ".cs", ".cpp", ".go"],
+        "maxSizeMB": 15
+      },
+      "outputFormats": {
+        "options": ["Text", "Markdown", "JSON"],
+        "defaultFormat": "Markdown"
+      }
+    },
+    {
+      "id": "regex-builder",
+      "name": "Regex Builder",
+      "description": "Generate and explain regular expressions for pattern matching.",
+      "categories": ["Development", "Utilities"],
+      "providers": ["OpenAI", "Anthropic", "Google", "Mistral"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Google": ["Gemini Pro", "Gemini Flash"],
+        "Mistral": ["Mistral Large", "Mistral Medium"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".txt", ".log", ".csv", ".json"],
+        "maxSizeMB": 10
+      },
+      "outputFormats": {
+        "options": ["Text", "JSON", "Markdown"],
+        "defaultFormat": "Text"
+      }
+    },
+    {
+      "id": "bug-fix-explainer",
+      "name": "Bug Fix Explainer",
+      "description": "Analyze code issues and provide debugging solutions.",
+      "categories": ["Development", "Debugging"],
+      "providers": ["OpenAI", "Anthropic", "Google", "Mistral"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Google": ["Gemini Pro", "Gemini Ultra"],
+        "Mistral": ["Mistral Large", "Codestral"]
+      },
+      "agents": ["Bolt", "Replit", "Cursor", "Lovable"],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": true,
+      "fileUploadRules": {
+        "allowedTypes": [".py", ".js", ".ts", ".java", ".log", ".txt"],
+        "maxSizeMB": 20
+      },
+      "outputFormats": {
+        "options": ["Text", "Markdown", "JSON"],
+        "defaultFormat": "Text"
+      }
+    },
+    {
+      "id": "api-docs-generator",
+      "name": "API Documentation Generator",
+      "description": "Generate comprehensive API documentation from code or specifications.",
+      "categories": ["Development", "Documentation"],
+      "providers": ["OpenAI", "Anthropic", "Google", "Mistral"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet"],
+        "Google": ["Gemini Pro", "Gemini Ultra"],
+        "Mistral": ["Mistral Large", "Codestral"]
+      },
+      "agents": ["Bolt", "Replit", "Cursor"],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": true,
+      "fileUploadRules": {
+        "allowedTypes": [".py", ".js", ".ts", ".json", ".yaml", ".md", ".openapi"],
+        "maxSizeMB": 25
+      },
+      "outputFormats": {
+        "options": ["Markdown", "JSON", "HTML", "OpenAPI"],
+        "defaultFormat": "Markdown"
+      }
+    },
+    {
+      "id": "logo-design-prompt-generator",
+      "name": "Logo Design Prompt Generator",
+      "description": "Generate detailed prompts for AI logo creation tools.",
+      "categories": ["Design", "Branding"],
+      "providers": ["OpenAI", "Stability AI", "Midjourney", "Adobe Firefly"],
+      "models": {
+        "OpenAI": ["DALL·E 3", "DALL·E 2"],
+        "Stability AI": ["Stable Diffusion XL", "SDXL Turbo"],
+        "Midjourney": ["Midjourney v6", "Midjourney v5.2"],
+        "Adobe Firefly": ["Firefly 2", "Firefly 1"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".png", ".jpg", ".jpeg", ".svg", ".ai"],
+        "maxSizeMB": 12
+      },
+      "outputFormats": {
+        "options": ["Text", "JSON", "SVG", "PNG"],
+        "defaultFormat": "Text"
+      }
+    },
+    {
+      "id": "ui-ux-mockup-prompt-generator",
+      "name": "UI/UX Mockup Prompt Generator",
+      "description": "Generate prompts for creating UI/UX designs and mockups.",
+      "categories": ["Design", "UI/UX"],
+      "providers": ["OpenAI", "Stability AI", "Midjourney", "Adobe Firefly"],
+      "models": {
+        "OpenAI": ["DALL·E 3", "DALL·E 2"],
+        "Stability AI": ["Stable Diffusion XL", "SDXL Turbo"],
+        "Midjourney": ["Midjourney v6", "Midjourney v5.2"],
+        "Adobe Firefly": ["Firefly 2", "Firefly 1"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".png", ".jpg", ".jpeg", ".figma", ".sketch", ".xd"],
+        "maxSizeMB": 15
+      },
+      "outputFormats": {
+        "options": ["Text", "JSON", "HTML", "CSS"],
+        "defaultFormat": "Text"
+      }
+    },
+    {
+      "id": "photography-prompt-generator",
+      "name": "Photography Prompt Generator",
+      "description": "Generate creative photography prompts and concepts.",
+      "categories": ["Photography", "Creative"],
+      "providers": ["OpenAI", "Stability AI", "Midjourney", "Adobe Firefly"],
+      "models": {
+        "OpenAI": ["DALL·E 3", "DALL·E 2"],
+        "Stability AI": ["Stable Diffusion XL", "Stable Diffusion 3"],
+        "Midjourney": ["Midjourney v6", "Niji v6"],
+        "Adobe Firefly": ["Firefly 2", "Firefly 1"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".png", ".jpg", ".jpeg", ".raw", ".tiff"],
+        "maxSizeMB": 20
+      },
+      "outputFormats": {
+        "options": ["Text", "JSON", "Markdown"],
+        "defaultFormat": "Text"
+      }
+    },
+    {
+      "id": "creative-story-writer",
+      "name": "Creative Story Writer",
+      "description": "Generate creative stories, narratives, and fictional content.",
+      "categories": ["Writing", "Creative"],
+      "providers": ["OpenAI", "Anthropic", "Google", "Cohere"],
+      "models": {
+        "OpenAI": ["GPT-4", "GPT-5", "GPT-4 Turbo"],
+        "Anthropic": ["Claude 3.7", "Claude 3 Sonnet", "Claude 3 Opus"],
+        "Google": ["Gemini Pro", "Gemini Ultra"],
+        "Cohere": ["Command R+", "Command R"]
+      },
+      "agents": [],
+      "allowCustomProvider": true,
+      "allowCustomModel": true,
+      "allowCustomAgent": false,
+      "fileUploadRules": {
+        "allowedTypes": [".txt", ".docx", ".pdf", ".md"],
+        "maxSizeMB": 15
+      },
+      "outputFormats": {
+        "options": ["Text", "Markdown", "PDF", "EPUB"],
+        "defaultFormat": "Text"
+      }
+    }
+  ]
+}
