@@ -97,6 +97,16 @@ const HybridToolPage: React.FC = () => {
 
   const isUserApiConfigured = !!(settings?.api_key && settings?.base_url);
 
+  const MAX_PROMPT_CHARS = 12000; // soft cap
+  const MAX_FILE_CHARS = 4000; // per file cap
+  const MAX_TOTAL_FILE_CHARS = 12000; // total files cap
+
+  const summarizeIfLong = (text: string, cap: number) => {
+    if (text.length <= cap) return text;
+    // naive truncation with notice; can be replaced by smarter summarization later
+    return `${text.slice(0, cap)}\n\n--- TRUNCATED (original length ${text.length}) ---`;
+  };
+
   useEffect(() => {
     const foundTool = toolsConfig.tools.find(t => t.id === toolId);
     if (foundTool) {
@@ -238,7 +248,10 @@ const HybridToolPage: React.FC = () => {
       // Prepare uploaded files block for template
       const filesBlock = uploadedFiles
         .filter(f => !!f.content)
-        .map(f => `--- File: ${f.file.name} ---\n${f.content}\n--- End of ${f.file.name} ---`)
+        .map(f => {
+          const truncated = summarizeIfLong(f.content || '', MAX_FILE_CHARS);
+          return `--- File: ${f.file.name} ---\n${truncated}\n--- End of ${f.file.name} ---`;
+        })
         .join('\n\n');
 
       const provider = showCustomProvider ? customProvider : selectedProvider;
@@ -258,8 +271,8 @@ const HybridToolPage: React.FC = () => {
         model: model || '',
         tone: tone || '',
         output_format: output_format || '',
-        user_input: inputPrompt || '',
-        uploaded_files: filesBlock || '',
+        user_input: summarizeIfLong(inputPrompt || '', MAX_PROMPT_CHARS),
+        uploaded_files: summarizeIfLong(filesBlock || '', MAX_TOTAL_FILE_CHARS),
         coding_agent: agent || '',
         // Optional extras used by some templates
         language: '', framework: '', libraries: '', environment: '', io_contracts: '', constraints: '', style_guide: '', codebase_context: '',
@@ -280,7 +293,14 @@ const HybridToolPage: React.FC = () => {
         genre: '', setting: '', characters: '', pov_tense: '', themes: ''
       };
 
-      const compiledPrompt = optimized ? replacePlaceholders(optimized, vars) : inputPrompt;
+      const compiledPrompt = optimized ? replacePlaceholders(optimized, vars) : vars.user_input;
+
+      // bail if still too long (hard cap)
+      if (compiledPrompt.length > 24000) {
+        setEnhancedPrompt('Error: Prompt too large after truncation. Please reduce input or files and try again.');
+        setLoading(false);
+        return;
+      }
 
       // Lazy import API service
       const { apiService } = await import('../lib/api');
@@ -376,10 +396,47 @@ const HybridToolPage: React.FC = () => {
   };
 
   const handleDownload = () => {
+    const format = (selectedOutputFormat || 'Text').toLowerCase();
+
+    const getMimeAndExt = () => {
+      switch (format) {
+        case 'json':
+          return { mime: 'application/json', ext: 'json', content: tryFormatJson(enhancedPrompt) };
+        case 'csv':
+          return { mime: 'text/csv', ext: 'csv', content: enhancedPrompt };
+        case 'html':
+          return { mime: 'text/html', ext: 'html', content: enhancedPrompt };
+        case 'markdown':
+        case 'md':
+          return { mime: 'text/markdown', ext: 'md', content: enhancedPrompt };
+        case 'sql':
+          return { mime: 'application/sql', ext: 'sql', content: enhancedPrompt };
+        case 'pdf':
+          // We only generate text; provide .md for portability when PDF selected
+          return { mime: 'text/markdown', ext: 'md', content: enhancedPrompt };
+        case 'word':
+          return { mime: 'text/markdown', ext: 'md', content: enhancedPrompt };
+        case 'srt':
+          return { mime: 'application/x-subrip', ext: 'srt', content: enhancedPrompt };
+        default:
+          return { mime: 'text/plain', ext: 'txt', content: enhancedPrompt };
+      }
+    };
+
+    const tryFormatJson = (text: string) => {
+      try {
+        const parsed = JSON.parse(text);
+        return JSON.stringify(parsed, null, 2);
+      } catch {
+        return text; // fallback if not valid JSON
+      }
+    };
+
+    const { mime, ext, content } = getMimeAndExt();
     const element = document.createElement('a');
-    const file = new Blob([enhancedPrompt], { type: 'text/plain' });
+    const file = new Blob([content], { type: mime });
     element.href = URL.createObjectURL(file);
-    element.download = `${tool?.name.replace(/\s+/g, '-').toLowerCase()}-prompt.txt`;
+    element.download = `${tool?.name.replace(/\s+/g, '-').toLowerCase()}-prompt.${ext}`;
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
