@@ -126,10 +126,6 @@ The `config/` directory contains all the configuration files that define the beh
 # Supabase Configuration
 VITE_SUPABASE_URL=https://your-project.supabase.co
 VITE_SUPABASE_ANON_KEY=your_anon_key_here
-
-# Optional AI Provider Keys
-
-VITE_GOOGLE_API_KEY=your_google_key
 ```
 
 **Development vs Production:**
