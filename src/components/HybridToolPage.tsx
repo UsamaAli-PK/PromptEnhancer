@@ -22,9 +22,11 @@ import {
 } from 'lucide-react';
 import Navbar from './Navbar';
 import toolsConfig from '../config/tools.json';
+import prompts from '../config/prompts.json';
 import { useAuth } from '../contexts/AuthContext';
 import { databaseService } from '../lib/database';
 import type { SavedPrompt } from '../lib/supabase';
+import { useUserSettings } from '../hooks/useUserSettings';
 
 interface Tool {
   id: string;
@@ -55,9 +57,15 @@ interface UploadedFile {
   type: 'text' | 'image' | 'other';
 }
 
+// Helper to replace {{placeholders}} in templates
+const replacePlaceholders = (template: string, vars: Record<string, string>): string => {
+  return template.replace(/\{\{(\w+)\}\}/g, (_match, key) => (vars[key] ?? ''));
+};
+
 const HybridToolPage: React.FC = () => {
   const { toolId } = useParams<{ toolId: string }>();
   const { user } = useAuth();
+  const { settings, loading: settingsLoading } = useUserSettings();
   const [tool, setTool] = useState<Tool | null>(null);
   const [inputPrompt, setInputPrompt] = useState('');
   const [enhancedPrompt, setEnhancedPrompt] = useState('');
@@ -86,6 +94,8 @@ const HybridToolPage: React.FC = () => {
     'professional', 'casual', 'friendly', 'educational', 'funny', 
     'marketing', 'storytelling', 'technical', 'persuasive', 'creative'
   ];
+
+  const isUserApiConfigured = !!(settings?.api_key && settings?.base_url);
 
   useEffect(() => {
     const foundTool = toolsConfig.tools.find(t => t.id === toolId);
@@ -215,41 +225,83 @@ const HybridToolPage: React.FC = () => {
   };
 
   const handleEnhance = async () => {
-    if (!inputPrompt.trim() || !tool) return;
+    if (!tool) return;
+    if (!inputPrompt.trim()) return;
+
+    if (!isUserApiConfigured) {
+      alert('Please add your API key and base URL in Profile → API Keys before generating.');
+      return;
+    }
     
     setLoading(true);
     try {
-      // Prepare file content for API
-      const fileContent = uploadedFiles
-        .filter(f => f.content)
-        .map(f => `File: ${f.file.name}\n${f.content}`);
-      
+      // Prepare uploaded files block for template
+      const filesBlock = uploadedFiles
+        .filter(f => !!f.content)
+        .map(f => `--- File: ${f.file.name} ---\n${f.content}\n--- End of ${f.file.name} ---`)
+        .join('\n\n');
+
       const provider = showCustomProvider ? customProvider : selectedProvider;
       const model = showCustomModel ? customModel : selectedModel;
       const agent = showCustomAgent ? customAgent : selectedAgent;
-      
-      // Call actual API
+      const output_format = selectedOutputFormat;
+      const tone = selectedTone;
+
+      // Gather template
+      // @ts-expect-error json typing
+      const tmpl = prompts?.templates?.[tool.id];
+      const optimized: string | undefined = tmpl?.optimized;
+
+      // Build placeholder map (include common fields; others default to '')
+      const vars: Record<string, string> = {
+        provider: provider || '',
+        model: model || '',
+        tone: tone || '',
+        output_format: output_format || '',
+        user_input: inputPrompt || '',
+        uploaded_files: filesBlock || '',
+        coding_agent: agent || '',
+        // Optional extras used by some templates
+        language: '', framework: '', libraries: '', environment: '', io_contracts: '', constraints: '', style_guide: '', codebase_context: '',
+        style: '', aspect_ratio: '', camera_settings: '', lighting: '', color_palette: '', mood: '', details: '', negative_prompts: '', quality: '',
+        audience: '', length: '', key_points: '', sources: '',
+        platform: '', hashtags: '', cta: '',
+        usp: '', product: '', benefits: '', features: '', social_proof: '',
+        database: '', schema: '', samples: '', query_type: '', expected_output: '',
+        recipient: '', context: '', signature: '',
+        seo_keywords: '', outline: '', references: '',
+        target_url: '', primary_keyword: '', secondary_keywords: '', brand: '',
+        duration: '', hook_style: '',
+        job_description: '', experience: '', achievements: '', skills: '', format_pref: '',
+        level: '', objectives: '', prerequisites: '', materials: '', assessment: '', question_types: '', difficulty: '', num_questions: '', include_answers: '',
+        key_questions: '', depth: '', thesis: '', citation_style: '', key_concepts: '', brand_voice: '', differentiators: '', sections: '', context_channel: '', uvp: '',
+        company: '', headline_angle: '', facts: '', quotes: '', media_contact: '', date: '',
+        composition: '', lens_camera: '', location: '', time_weather: '', color_mood: '',
+        genre: '', setting: '', characters: '', pov_tense: '', themes: ''
+      };
+
+      const compiledPrompt = optimized ? replacePlaceholders(optimized, vars) : inputPrompt;
+
+      // Lazy import API service
       const { apiService } = await import('../lib/api');
-      
-      const response = await apiService.enhancePrompt({
-        prompt: inputPrompt,
-        provider,
-        model,
-        tone: selectedTone,
-        outputFormat: selectedOutputFormat,
-        fileContent: fileContent.length > 0 ? fileContent : undefined,
-        toolType: tool.name
-      });
+
+      const response = await apiService.enhancePromptWithUserConfig(
+        {
+          prompt: compiledPrompt,
+          provider,
+          model,
+          tone,
+          outputFormat: output_format,
+          toolType: tool.name
+        },
+        settings!.api_key!,
+        settings!.base_url!
+      );
 
       setEnhancedPrompt(response.enhancedPrompt);
-      
-      // Save to database if user wants to
-      if (response.enhancedPrompt) {
-        // Auto-save functionality can be added here
-      }
+      // Optionally auto-save can be added here
     } catch (error) {
       console.error('Enhancement error:', error);
-      // Show user-friendly error message
       setEnhancedPrompt(`Error: ${error instanceof Error ? error.message : 'Failed to enhance prompt. Please try again.'}`);
     } finally {
       setLoading(false);
@@ -750,12 +802,17 @@ const HybridToolPage: React.FC = () => {
             {/* Generate Button */}
             <button
               onClick={handleEnhance}
-              disabled={!inputPrompt.trim() || loading}
+              disabled={!inputPrompt.trim() || loading || (!settingsLoading && !isUserApiConfigured)}
               className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:shadow-2xl hover:shadow-cyan-500/25 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-3"
             >
               <Sparkles className="h-6 w-6" />
               <span>{loading ? 'Generating...' : 'Generate Enhanced Prompt'}</span>
             </button>
+            {(!settingsLoading && !isUserApiConfigured) && (
+              <div className="text-sm text-red-300 mt-2">
+                Add your API key and base URL in <Link to="/profile" className="underline text-cyan-300">Profile → API Keys</Link>.
+              </div>
+            )}
 
             {/* Tool Info */}
             <div className="glass rounded-xl p-4 border border-white/10">
