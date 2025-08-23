@@ -37,27 +37,7 @@ class APIService {
   }
 
   private initializeProviders() {
-    // OpenAI
-    if (import.meta.env.VITE_OPENAI_API_KEY) {
-      this.providers.set('OpenAI', {
-        name: 'OpenAI',
-        models: ['GPT-4', 'GPT-5', 'GPT-4 Turbo'],
-        apiKey: import.meta.env.VITE_OPENAI_API_KEY,
-        baseUrl: 'https://api.openai.com/v1'
-      })
-    }
-
-    // Anthropic
-    if (import.meta.env.VITE_ANTHROPIC_API_KEY) {
-      this.providers.set('Anthropic', {
-        name: 'Anthropic',
-        models: ['Claude 3.7', 'Claude 3 Sonnet', 'Claude 3 Haiku'],
-        apiKey: import.meta.env.VITE_ANTHROPIC_API_KEY,
-        baseUrl: 'https://api.anthropic.com/v1'
-      })
-    }
-
-    // Add other providers...
+    // Removed dev env keys: providers are configured via user settings only
   }
 
   // Method to use user's custom API configuration
@@ -70,9 +50,7 @@ class APIService {
       // Use user's custom API configuration
       return await this.callCustomAPI(request, userApiKey, userBaseUrl);
     }
-    
-    // Fall back to default enhancement
-    return await this.enhancePrompt(request);
+    throw new Error('Missing user API configuration. Please add your API key and base URL in Profile.');
   }
 
   private async callCustomAPI(
@@ -107,12 +85,12 @@ class APIService {
 
       const data = await response.json();
       return {
-        enhancedPrompt: data.choices[0].message.content,
+        enhancedPrompt: data.choices?.[0]?.message?.content ?? data.content?.[0]?.text ?? '',
         provider: request.provider,
         model: request.model,
         usage: {
-          tokens: data.usage?.total_tokens || 0,
-          cost: this.calculateCost(data.usage?.total_tokens || 0, request.provider, request.model)
+          tokens: data.usage?.total_tokens || (data.usage?.input_tokens + data.usage?.output_tokens) || 0,
+          cost: this.calculateCost((data.usage?.total_tokens || (data.usage?.input_tokens + data.usage?.output_tokens) || 0), request.provider, request.model)
         }
       };
     } catch (error) {
@@ -121,101 +99,8 @@ class APIService {
     }
   }
 
-  async enhancePrompt(request: EnhancementRequest): Promise<EnhancementResponse> {
-    const provider = this.providers.get(request.provider)
-    if (!provider) {
-      throw new Error(`Provider ${request.provider} not configured`)
-    }
-
-    try {
-      // Route to appropriate provider
-      switch (request.provider) {
-        case 'OpenAI':
-          return await this.callOpenAI(request, provider)
-        case 'Anthropic':
-          return await this.callAnthropic(request, provider)
-        default:
-          throw new Error(`Provider ${request.provider} not implemented`)
-      }
-    } catch (error) {
-      console.error('API Enhancement Error:', error)
-      throw new Error('Failed to enhance prompt. Please try again.')
-    }
-  }
-
-  private async callOpenAI(request: EnhancementRequest, provider: AIProvider): Promise<EnhancementResponse> {
-    const systemPrompt = this.buildSystemPrompt(request)
-    const userPrompt = this.buildUserPrompt(request)
-
-    const response = await fetch(`${provider.baseUrl}/chat/completions`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${provider.apiKey}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: this.mapModelName(request.model, 'OpenAI'),
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userPrompt }
-        ],
-        temperature: this.getToneTemperature(request.tone),
-        max_tokens: 2000
-      })
-    })
-
-    if (!response.ok) {
-      throw new Error(`OpenAI API error: ${response.statusText}`)
-    }
-
-    const data = await response.json()
-    return {
-      enhancedPrompt: data.choices[0].message.content,
-      provider: request.provider,
-      model: request.model,
-      usage: {
-        tokens: data.usage?.total_tokens || 0,
-        cost: this.calculateCost(data.usage?.total_tokens || 0, 'OpenAI', request.model)
-      }
-    }
-  }
-
-  private async callAnthropic(request: EnhancementRequest, provider: AIProvider): Promise<EnhancementResponse> {
-    const systemPrompt = this.buildSystemPrompt(request)
-    const userPrompt = this.buildUserPrompt(request)
-
-    const response = await fetch(`${provider.baseUrl}/messages`, {
-      method: 'POST',
-      headers: {
-        'x-api-key': provider.apiKey,
-        'Content-Type': 'application/json',
-        'anthropic-version': '2023-06-01'
-      },
-      body: JSON.stringify({
-        model: this.mapModelName(request.model, 'Anthropic'),
-        max_tokens: 2000,
-        system: systemPrompt,
-        messages: [
-          { role: 'user', content: userPrompt }
-        ],
-        temperature: this.getToneTemperature(request.tone)
-      })
-    })
-
-    if (!response.ok) {
-      throw new Error(`Anthropic API error: ${response.statusText}`)
-    }
-
-    const data = await response.json()
-    return {
-      enhancedPrompt: data.content[0].text,
-      provider: request.provider,
-      model: request.model,
-      usage: {
-        tokens: data.usage?.input_tokens + data.usage?.output_tokens || 0,
-        cost: this.calculateCost(data.usage?.input_tokens + data.usage?.output_tokens || 0, 'Anthropic', request.model)
-      }
-    }
+  async enhancePrompt(_request: EnhancementRequest): Promise<EnhancementResponse> {
+    throw new Error('Use enhancePromptWithUserConfig with user API key and base URL.');
   }
 
   private buildSystemPrompt(request: EnhancementRequest): string {
@@ -249,7 +134,7 @@ Enhance the user's prompt to achieve maximum effectiveness with ${request.provid
     const modelMappings: { [key: string]: { [key: string]: string } } = {
       'OpenAI': {
         'GPT-4': 'gpt-4',
-        'GPT-5': 'gpt-4', // Fallback until GPT-5 is available
+        'GPT-5': 'gpt-4', // placeholder fallback
         'GPT-4 Turbo': 'gpt-4-turbo-preview'
       },
       'Anthropic': {
@@ -280,7 +165,6 @@ Enhance the user's prompt to achieve maximum effectiveness with ${request.provid
   }
 
   private calculateCost(tokens: number, provider: string, model: string): number {
-    // Simplified cost calculation - implement actual pricing
     const costPerToken: { [key: string]: number } = {
       'OpenAI': 0.00003,
       'Anthropic': 0.00008

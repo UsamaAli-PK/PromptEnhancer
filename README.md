@@ -165,9 +165,7 @@ See `.env.example` and set:
 VITE_SUPABASE_URL=your_supabase_project_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 
-# Optional: dev-only shared keys (Option B uses per-user keys at runtime)
-VITE_OPENAI_API_KEY=
-VITE_ANTHROPIC_API_KEY=
+
 ```
 
 ## 📊 Performance

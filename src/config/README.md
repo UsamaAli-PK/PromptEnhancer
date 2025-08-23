@@ -128,8 +128,7 @@ VITE_SUPABASE_URL=https://your-project.supabase.co
 VITE_SUPABASE_ANON_KEY=your_anon_key_here
 
 # Optional AI Provider Keys
-VITE_OPENAI_API_KEY=your_openai_key
-VITE_ANTHROPIC_API_KEY=your_anthropic_key
+
 VITE_GOOGLE_API_KEY=your_google_key
 ```
 
