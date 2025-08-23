@@ -1,0 +1,8 @@
+* text=auto eol=lf
+
+# Treat common data files as text
+*.json text
+*.md text
+*.yml text
+*.yaml text
+*.sql text

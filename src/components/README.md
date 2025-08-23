@@ -115,6 +115,9 @@ export const Component: React.FC<ComponentProps> = ({
 - Model and parameter configuration
 - Real-time prompt enhancement
 - Database integration for saving prompts
+- Prompt templates from `src/config/prompts.json` (optimized Markdown)
+- Option B calls using user API key/base URL
+- Prompt size/file truncation guards and format-aware downloads
 
 **Key Sections:**
 - Tool configuration panel

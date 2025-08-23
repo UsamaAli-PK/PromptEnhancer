@@ -94,7 +94,7 @@ create trigger update_user_settings_updated_at
 	execute function update_updated_at_column();
 
 -- Enable RLS
-a lter table users enable row level security;
+alter table users enable row level security;
 alter table saved_prompts enable row level security;
 alter table user_settings enable row level security;
 
