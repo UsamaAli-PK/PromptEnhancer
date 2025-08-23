@@ -1,0 +1,43 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[[redirects]]
+  from = "/login"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/register"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/dashboard"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/tool/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/hybrid-tool/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/library"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/profile"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/auth"
+  to = "/index.html"
+  status = 200

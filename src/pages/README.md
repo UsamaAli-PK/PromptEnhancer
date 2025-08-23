@@ -92,7 +92,7 @@ export default PageName;
 #### AuthPage
 **Authentication page** for user signup and login.
 
-**Route:** `/auth`
+**Route:** `/login` and `/register`
 **Access:** Public (no authentication required)
 
 **Features:**

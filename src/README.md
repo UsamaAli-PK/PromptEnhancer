@@ -37,7 +37,7 @@ src/
 
 **Routes:**
 - `/` - Landing page (public)
-- `/auth` - Authentication page
+- `/login` and `/register` - Authentication pages
 - `/dashboard` - Main dashboard (protected)
 - `/tool/:toolId` - Individual tool pages (protected)
 - `/library` - Saved prompts library (protected)

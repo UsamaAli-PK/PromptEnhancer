@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Sparkles, Eye, EyeOff } from 'lucide-react';
 import { FormValidation, validateEmail, validatePassword, validateName } from '../components/FormValidation';
 
 const AuthPage: React.FC = () => {
+  const location = useLocation();
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -19,8 +20,15 @@ const AuthPage: React.FC = () => {
   const { login, signup } = useAuth();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Set mode based on pathname
+    const path = location.pathname.toLowerCase();
+    if (path === '/login') setIsLogin(true);
+    else if (path === '/register') setIsLogin(false);
+  }, [location.pathname]);
+
   const validateForm = () => {
-    const errors = [];
+    const errors = [] as Array<{field: string, message: string}>;
     
     const emailError = validateEmail(formData.email);
     if (emailError) errors.push({ field: 'email', message: emailError });
@@ -77,6 +85,12 @@ const AuthPage: React.FC = () => {
       ...prev,
       [e.target.name]: e.target.value
     }));
+  };
+
+  const toggleMode = () => {
+    const nextIsLogin = !isLogin;
+    setIsLogin(nextIsLogin);
+    navigate(nextIsLogin ? '/login' : '/register', { replace: true });
   };
 
   return (
@@ -192,7 +206,7 @@ const AuthPage: React.FC = () => {
             <div className="text-center">
               <button
                 type="button"
-                onClick={() => setIsLogin(!isLogin)}
+                onClick={toggleMode}
                 className="text-sm text-purple-600 hover:text-purple-700 font-medium"
               >
                 {isLogin 

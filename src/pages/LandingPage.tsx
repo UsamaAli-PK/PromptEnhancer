@@ -277,7 +277,7 @@ const LandingPage: React.FC = () => {
               </span>
             </div>
             <Link
-              to="/auth"
+              to="/register"
               className="relative px-6 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full font-semibold text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 transform hover:scale-105"
             >
               <span className="relative z-10">Get Started</span>
@@ -312,7 +312,7 @@ const LandingPage: React.FC = () => {
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
               <Link
-                to="/auth"
+                to="/register"
                 className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full font-semibold text-lg text-white hover:shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300 transform hover:scale-105"
               >
                 <span className="relative z-10 flex items-center space-x-2">
@@ -732,7 +732,7 @@ const LandingPage: React.FC = () => {
                   </ul>
                   
                   <Link
-                    to="/auth"
+                    to="/register"
                     className={`block w-full py-3 px-6 rounded-full font-semibold text-center transition-all duration-300 transform hover:scale-105 ${
                       plan.popular
                         ? 'bg-gradient-to-r from-cyan-500 to-purple-500 text-white hover:shadow-lg hover:shadow-cyan-500/25'
@@ -944,7 +944,7 @@ const LandingPage: React.FC = () => {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Link
-              to="/auth"
+              to="/register"
               className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full font-semibold text-lg text-white hover:shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300 transform hover:scale-105"
             >
               <span className="relative z-10 flex items-center space-x-2">

@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import ErrorBoundary from './components/ErrorBoundary';
 const LandingPage = lazy(() => import('./pages/LandingPage'));
@@ -20,7 +20,9 @@ function App() {
             <Suspense fallback={<div className="p-8 text-center">Loading...</div>}>
               <Routes>
                 <Route path="/" element={<LandingPage />} />
-                <Route path="/auth" element={<AuthPage />} />
+                <Route path="/login" element={<AuthPage />} />
+                <Route path="/register" element={<AuthPage />} />
+                <Route path="/auth" element={<Navigate to="/login" replace />} />
                 <Route
                   path="/dashboard"
                   element={
