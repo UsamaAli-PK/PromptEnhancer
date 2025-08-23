@@ -16,7 +16,8 @@
         { "name": "codebase_context", "required": false },
         { "name": "coding_agent", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Principal software engineer & prompt engineer]\\n**Tone:** [{{tone}}]\\n**Authority:** [15+ years in large-scale systems, code quality, testing]\n\n---\n\n## Task (stepwise)\n\n1. **Longlist:** Generate **10** underused implementation strategies or prompt directives tailored to: {{user_input}} (one-line each).\n2. **Filter:** Exclude: [toy snippets, trivial Hello World, outdated patterns]. Apply any additional user constraints: [____].\n3. **Criteria scoring:** For each longlisted item, score 0–5 on: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Select top **3** strategies by combined score and distinct advantage.\n5. **Validate:** For each shortlisted strategy, verify with at least **one credible source type** (docs/standards, well‑known libraries, reputable blogs).\n6. **Output:** Produce the final deliverables (Checklist, Table, Ranked summary).\n7. **Self-review:** Re-check outputs for compliance; if any strategy lacks verification, mark with `⚠️` and either replace or explain shortfall.\n\n---\n\n## Context / Source rules\n\n* **Knowledge cutoff:** [latest available]\n* **Allowed source types:** official docs, language specs, reputable library docs, peer-reviewed articles, established textbooks, recognized practitioner blogs. Cite source type and year (no raw URLs unless requested).\n* **Scope boundaries:** [target language/framework and runtime]\n* **Assumptions:** [performance/security constraints, deployment environment]\n\n---\n\n## Reasoning & Validation (what to include)\n\n* 1–2 sentence rationale for each shortlisted strategy: efficiency, safety, or maintainability.\n* Brief validation note: source type + year + one-line evidence.\n* If uncertain (>30% gap), label `⚠️ Confidence: LOW` with a one‑line reason.\n\n---\n\n## Output Format (required parts — produce all in this order)\n\n### Part A — Quick Checklist (3–7 bullets)\n\n* [Step 1 the agent followed]\n* [Step 2 ...]\n\n### Part B — Markdown Table (exact columns)\n\n| Method name | Main resources (type, year) | Weekly time (hrs) | Estimated progress in 90 days            | Summary (1–2 lines) |\n| ----------- | --------------------------- | ----------------: | ---------------------------------------- | ------------------- |\n| [Method 1] | [e.g., official docs 2023]  |         [XX hrs] | [e.g., Code reliability +60%]            | [Why chosen]        |\n| [Method 2] | [type, year]                |         [XX hrs] | [estimate]                               | [Why chosen]        |\n| [Method 3] | [type, year]                |         [XX hrs] | [estimate]                               | [Why chosen]        |\n\n### Part C — Ranked Recommendations (short)\n\n1. **#1 — [Method name]** — 1–2 sentence reasoning + `Confidence: [HIGH/MED/LOW]`.\n2. **#2 — ...**\n3. **#3 — ...**\n\n### Part D — Rejected candidates (brief)\n\n* List 3 notable excluded strategies and **why** they were excluded (one-line each).\n\n---\n\n## Stop Conditions & Error Handling\n\n* **Success:** Exactly **3** verified, unique, medium-commitment strategies with credible sources and realistic time estimates.\n* **Partial success:** If <3 verified, output verified + `⚠️` explanation + up to 2 candidate alternatives with reasons they failed validation.\n* **Hard fail:** If none pass, return a diagnostic report and next steps.\n\n---\n\n## Iteration / Refinement Procedure\n\n* Perform one self-review: check table completeness, source presence, time realism.\n* If issues found, **refine once** and present Original → Revised + 1-line changelog.\n\n---\n\n## Constraints & Style Rules\n\n* Keep summaries ≤ 25 words.\n* Neutral, evidence-focused language; no marketing claims.\n* Do not invent sources; if uncertain, mark `⚠️` and give best rationale."
     },
 
     "image-generator": {
@@ -34,7 +35,8 @@
         { "name": "negative_prompts", "required": false },
         { "name": "quality", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Art director & prompt engineer]\\n**Tone:** [{{tone}}]\\n**Authority:** [Extensive experience with diffusion models and photographic composition]\n\n---\n\n## Task (stepwise)\n\n1. **Longlist:** Generate **10** underused image prompt directions for: {{user_input}} (one-line each).\n2. **Filter:** Exclude: [generic stock aesthetics, cliché compositions]. Apply any additional user constraints: [____].\n3. **Criteria scoring:** For each, score 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Select top **3** concepts by combined score and distinct visual advantage.\n5. **Validate:** For each shortlisted prompt, cite at least one credible resource type (e.g., photography guide, art framework, practitioner blog).\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** If any lacks validation, mark `⚠️` and replace/explain.\n\n---\n\n## Context / Source rules\n* **Knowledge cutoff:** [latest available]\n* **Allowed source types:** established textbooks, practitioner blogs, official frameworks, peer-reviewed work. Cite type and year.\n* **Scope boundaries:** [style, lens, lighting, aspect ratio]\n* **Assumptions:** [rendering budget/time, reference style adherence]\n\n---\n\n## Reasoning & Validation\n\n* Give 1–2 sentence rationale per shortlisted concept: composition, mood, or clarity.\n* Add validation note: source type + year + one-line evidence.\n* Label `⚠️ Confidence: LOW` if uncertain.\n\n---\n\n## Output Format (required parts — produce all in this order)\n\n### Part A — Quick Checklist (3–7 bullets)\n\n* [Step 1 the agent followed]\n* [Step 2 ...]\n\n### Part B — Markdown Table (exact columns)\n\n| Method name | Main resources (type, year) | Weekly time (hrs) | Estimated progress in 90 days            | Summary (1–2 lines) |\n| ----------- | --------------------------- | ----------------: | ---------------------------------------- | ------------------- |\n| [Concept 1] | [type, year]                |         [XX hrs] | [portfolio impact estimate]              | [Why chosen]        |\n| [Concept 2] | [type, year]                |         [XX hrs] | [estimate]                               | [Why chosen]        |\n| [Concept 3] | [type, year]                |         [XX hrs] | [estimate]                               | [Why chosen]        |\n\n### Part C — Ranked Recommendations (short)\n\n1. **#1 — [Concept]** — 1–2 sentence reasoning + `Confidence: [HIGH/MED/LOW]`.\n2. **#2 — ...**\n3. **#3 — ...**\n\n### Part D — Rejected candidates (brief)\n\n* List 3 notable excluded concepts and why.\n\n---\n\n## Stop Conditions & Error Handling\n\n* **Success:** Exactly **3** verified, unique, medium-commitment concepts with credible source types.\n* **Partial/Hard fail:** As specified above.\n\n---\n\n## Iteration / Refinement Procedure\n\n* Single self-review; refine once if needed and show changes.\n\n---\n\n## Constraints & Style Rules\n\n* ≤ 25 words per summary; neutral language; no invented sources."
     },
 
     "text-generator": {
@@ -49,7 +51,8 @@
         { "name": "sources", "required": false },
         { "name": "constraints", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Senior editor & prompt engineer]\\n**Tone:** [{{tone}}]\\n**Authority:** [Evidence-focused editorial practice, clarity, and structure]\n\n---\n\n## Task (stepwise)\n\n1. **Longlist:** Generate **10** underused writing angles/structures for: {{user_input}} (one-line each).\n2. **Filter:** Exclude: [clickbait tropes, unsupported claims]. Apply any user constraints: [____].\n3. **Criteria scoring:** Score 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** angles by combined score and distinct advantage.\n5. **Validate:** For each, verify with credible source type (style guide, framework, reference work).\n6. **Output:** Deliverables (Checklist, Table, Ranked summary).\n7. **Self-review:** Add `⚠️` if evidence thin; replace/explain.\n\n---\n\n## Context / Source rules\n* **Knowledge cutoff:** [latest available]\n* **Allowed source types:** textbooks, style manuals, practitioner blogs, peer-reviewed work. Cite type + year.\n* **Scope boundaries:** [audience, length, domain]\n* **Assumptions:** [required sections, perspective]\n\n---\n\n## Reasoning & Validation\n\n* 1–2 sentence rationale per shortlisted angle.\n* Validation note: source type + year + one-line evidence.\n* `⚠️ Confidence: LOW` if uncertain.\n\n---\n\n## Output Format\n\n### Part A — Quick Checklist (3–7 bullets)\n* [Step 1]\n* [Step 2]\n\n### Part B — Markdown Table (exact columns)\n| Method name | Main resources (type, year) | Weekly time (hrs) | Estimated progress in 90 days            | Summary (1–2 lines) |\n| ----------- | --------------------------- | ----------------: | ---------------------------------------- | ------------------- |\n| [Angle 1]   | [type, year]                |         [XX hrs] | [readability/impact estimate]            | [Why chosen]        |\n| [Angle 2]   | [type, year]                |         [XX hrs] | [estimate]                               | [Why chosen]        |\n| [Angle 3]   | [type, year]                |         [XX hrs] | [estimate]                               | [Why chosen]        |\n\n### Part C — Ranked Recommendations (short)\n1. **#1 — [Angle]** — reasoning + `Confidence: [HIGH/MED/LOW]`.\n2. **#2 — ...**\n3. **#3 — ...**\n\n### Part D — Rejected candidates (brief)\n* 3 excluded angles + reasons.\n\n---\n\n## Stop Conditions, Iteration, Constraints\n* As specified in the global template above (success/partial/hard fail, one self-review, ≤25-word summaries, no invented sources)."
     },
 
     "caption-generator": {
@@ -63,7 +66,8 @@
         { "name": "cta", "required": false },
         { "name": "constraints", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Senior social strategist & copywriter]\\n**Tone:** [{{tone}}]\\n**Authority:** [Cross-platform content optimization and engagement]\n\n---\n\n## Task (stepwise)\n\n1. **Longlist:** Generate **10** underused caption angles tailored to: {{user_input}} and {{platform}} (one-line each).\n2. **Filter:** Exclude: [spammy clickbait, vague CTAs, banned/overused hashtags]. Apply constraints: [____].\n3. **Criteria scoring:** Score 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** angles by score and platform fit.\n5. **Validate:** For each, cite a credible source type (platform best practices, practitioner blog, framework) with year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` if weak evidence; refine/replace.\n\n---\n\n## Context / Source rules\n* **Knowledge cutoff:** [latest available]\n* **Allowed source types:** platform docs, practitioner blogs, reputable analyses. Cite type + year.\n* **Scope boundaries:** [platform constraints, character limits, audience]\n* **Assumptions:** [brand voice, campaign goal]\n\n---\n\n## Output Format\n(Use the standard Checklist/Table/Ranked format and constraints)."
     },
 
     "copywriting-generator": {
@@ -80,7 +84,8 @@
         { "name": "social_proof", "required": false },
         { "name": "constraints", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Direct-response copywriter & conversion strategist]\\n**Tone:** [{{tone}}]\\n**Authority:** [Performance marketing, objection handling, compliance-aware]\n\n---\n\n## Task (stepwise)\n\n1. **Longlist:** Generate **10** underused copy angles for: {{user_input}} (one-line each).\n2. **Filter:** Exclude: [unsubstantiated claims, non-compliant phrasing]. Apply user constraints: [____].\n3. **Criteria scoring:** Score 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** angles by score and distinct advantage.\n5. **Validate:** Cite at least one credible source type (framework, textbook, practitioner analysis) with year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` where evidence thin; refine/replace.\n\n---\n\n## Context / Source rules\n* **Knowledge cutoff:** [latest available]\n* **Allowed source types:** established copy frameworks, textbooks, practitioner blogs, meta-analyses. Cite type + year.\n* **Scope boundaries:** [offer, audience, USP, compliance]\n* **Assumptions:** [funnel stage, channel]\n\n---\n\n## Output Format\n(Use the standard Checklist/Table/Ranked format and constraints)."
     },
 
     "data-sql-generator": {
@@ -95,7 +100,8 @@
         { "name": "constraints", "required": false },
         { "name": "expected_output", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Data engineer & SQL architect]\\n**Tone:** [{{tone}}]\\n**Authority:** [Query optimization, schema design, data governance]\n\n---\n\n## Task (stepwise)\n\n1. **Longlist:** Generate **10** underused querying strategies/patterns for: {{user_input}} (one-line each).\n2. **Filter:** Exclude: [full scans without justification, unsafe operations]. Apply constraints: [____].\n3. **Criteria scoring:** Score 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** strategies by combined score and resource efficiency.\n5. **Validate:** Use credible source types: vendor docs, textbooks, practitioner blogs (with year).\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` where validation is weak; refine/replace.\n\n---\n\n## Context / Source rules\n* **Knowledge cutoff:** [latest available]\n* **Allowed source types:** vendor docs, SQL standards, textbooks, practitioner blogs.\n* **Scope boundaries:** [dialect, schema]\n* **Assumptions:** [permissions, performance targets]\n\n---\n\n## Output Format\n(Use the standard Checklist/Table/Ranked format and constraints)."
     },
 
     "email-writer": {
@@ -110,7 +116,8 @@
         { "name": "signature", "required": false },
         { "name": "constraints", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Email strategist & copywriter]\\n**Tone:** [{{tone}}]\\n**Authority:** [Deliverability, clarity, and conversion-focused messaging]\n\n---\n\n## Task (stepwise)\n\n1. **Longlist:** Generate **10** underused email angles/outlines for: {{user_input}} (one-line each).\n2. **Filter:** Exclude: [spam triggers, non-compliant claims]. Apply constraints: [____].\n3. **Criteria scoring:** Score 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** angles by score and conversion likelihood.\n5. **Validate:** Cite credible source type (frameworks, practitioner guides) with year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` if weak evidence; refine.\n\n---\n\n## Context / Source rules\n* **Knowledge cutoff:** [latest available]\n* **Allowed source types:** style manuals, practitioner blogs, textbooks.\n* **Scope boundaries:** [recipient role, CTA, length]\n* **Assumptions:** [brand voice, constraints]\n\n---\n\n## Output Format\n(Use the standard Checklist/Table/Ranked format and constraints)."
     },
 
     "blog-generator": {
@@ -124,7 +131,8 @@
         { "name": "references", "required": false },
         { "name": "length", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Content strategist & editor]\\n**Tone:** [{{tone}}]\\n**Authority:** [SEO-aware structure, clarity, and reader engagement]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused blog angles/outlines for: {{user_input}}.\n2. **Filter:** Exclude: [generic listicles, unverified claims]. Add constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** by score and SEO leverage.\n5. **Validate:** Cite credible source type (style guides, references) with year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` if weak evidence; refine.\n\n---\n## Context / Source rules\n* **Knowledge cutoff:** [latest available]\n* **Allowed source types:** textbooks, style guides, practitioner blogs, reputable analyses.\n* **Scope boundaries:** [audience, keywords, outline]\n* **Assumptions:** [brand voice, length]\n\n---\n## Output Format\n(Standard parts as above)."
     },
 
     "seo-helper": {
@@ -137,7 +145,8 @@
         { "name": "brand", "required": false },
         { "name": "constraints", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [SEO specialist]\\n**Tone:** [{{tone}}]\\n**Authority:** [On-page optimization, schema, SERP best practices]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused SEO asset approaches for: {{target_url}} / {{primary_keyword}}.\n2. **Filter:** Exclude: [keyword stuffing, misleading titles]. Add constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** approaches.\n5. **Validate:** Cite credible source type (search guidelines, practitioner analyses).\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` where weak; refine.\n\n---\n## Context / Source rules\n* **Knowledge cutoff:** [latest available]\n* **Allowed source types:** official guidelines, reputable analyses, textbooks.\n* **Scope boundaries:** [keywords, lengths]\n* **Assumptions:** [brand voice]\n\n---\n## Output Format\n(Standard parts as above)."
     },
 
     "video-script-generator": {
@@ -151,7 +160,8 @@
         { "name": "cta", "required": false },
         { "name": "constraints", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Video script producer]\\n**Tone:** [{{tone}}]\\n**Authority:** [Narrative pacing, platform-specific storytelling]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused script outline concepts for: {{user_input}} on {{platform}}.\n2. **Filter:** Exclude: [clickbait hooks, misleading claims]. Add constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** by score and pacing clarity.\n5. **Validate:** Cite credible source type (handbooks, practitioner blogs, frameworks) with year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` if weak evidence.\n\n---\n## Context / Source rules\n* **Knowledge cutoff:** [latest available]\n* **Allowed source types:** screenwriting guides, practitioner blogs, educational frameworks.\n* **Scope boundaries:** [duration, beats, CTA]\n* **Assumptions:** [platform constraints]\n\n---\n## Output Format\n(Standard parts as above)."
     },
 
     "resume-builder": {
@@ -165,7 +175,8 @@
         { "name": "skills", "required": false },
         { "name": "format_pref", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Career coach & resume strategist]\\n**Tone:** [{{tone}}]\\n**Authority:** [ATS optimization, quantified impact, tailoring to JD]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused tailoring strategies for role: {{user_input}}.\n2. **Filter:** Exclude: [vague buzzwords, unverifiable claims]. Add constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** strategies.\n5. **Validate:** Source type (career frameworks, reputable guides) + year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` if evidence thin.\n\n---\n## Context / Source rules\n* **Knowledge cutoff:** [latest available]\n* **Allowed source types:** career handbooks, practitioner guides, reputable analyses.\n* **Scope boundaries:** [JD alignment, metrics]\n* **Assumptions:** [ATS formatting]\n\n---\n## Output Format\n(Standard parts as above)."
     },
 
     "lesson-plan-generator": {
@@ -180,7 +191,8 @@
         { "name": "materials", "required": false },
         { "name": "assessment", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Instructional designer & learning scientist]\\n**Tone:** [{{tone}}]\\n**Authority:** [Bloom's taxonomy, evidence-based instruction]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused lesson approaches for: {{user_input}} (one-line each).\n2. **Filter:** Exclude: [lecture-only patterns, low-engagement methods]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** approaches.\n5. **Validate:** Cite at least one credible source type (framework, textbook, meta-analysis) with year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` where validation weak; refine.\n\n---\n## Context / Source rules\n* **Knowledge cutoff:** [latest available]\n* **Allowed source types:** textbooks, meta-analyses, practitioner frameworks.\n* **Scope boundaries:** [level, duration, objectives]\n* **Assumptions:** [resources, constraints]\n\n---\n## Output Format\n(Standard parts as above)."
     },
 
     "quiz-generator": {
@@ -194,7 +206,8 @@
         { "name": "num_questions", "required": false },
         { "name": "include_answers", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Assessment designer]\\n**Tone:** [{{tone}}]\\n**Authority:** [Learning objectives mapping, validity & reliability]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused question-set blueprints for: {{user_input}}.\n2. **Filter:** Exclude: [trick questions, ambiguous wording]. Add constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** blueprints.\n5. **Validate:** Cite credible source type (assessment frameworks, textbooks) with year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` where weak; refine.\n\n---\n## Context / Source rules\n* **Knowledge cutoff:** [latest available]\n* **Allowed source types:** assessment textbooks, frameworks, practitioner analyses.\n* **Scope boundaries:** [objectives, difficulty, types]\n* **Assumptions:** [coverage, answer keys]\n\n---\n## Output Format\n(Standard parts as above)."
     },
 
     "research-summarizer": {
@@ -207,7 +220,8 @@
         { "name": "sources", "required": false },
         { "name": "constraints", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Research analyst]\\n**Tone:** [{{tone}}]\\n**Authority:** [Evidence synthesis, methodological rigor]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused summarization frames for: {{user_input}}.\n2. **Filter:** Exclude: [anecdotal evidence, unsourced claims]. Add constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** frames.\n5. **Validate:** Cite credible source type (peer-reviewed/meta-analysis/textbook) with year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** `⚠️` where uncertain; refine.\n\n---\n## Context / Source rules\n* **Knowledge cutoff:** [YYYY-MM-DD or latest available]\n* **Allowed source types:** peer-reviewed, textbooks, practitioner blogs, meta-analyses, official frameworks.\n* **Scope boundaries:** [domains/exclusions]\n* **Assumptions:** [explicit assumptions]\n\n---\n## Output Format\n(Standard parts as above)."
     },
 
     "academic-essay-writer": {
@@ -221,7 +235,8 @@
         { "name": "sources", "required": false },
         { "name": "constraints", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Academic writing tutor]\\n**Tone:** [{{tone}}]\\n**Authority:** [Citation integrity, argumentation, structure]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused argumentation outlines for: {{user_input}}.\n2. **Filter:** Exclude: [fallacies, unsourced assertions]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** outlines.\n5. **Validate:** Cite credible source type (textbook, guide, peer-reviewed) + year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` where needed.\n\n---\n## Context / Source rules\n* **Knowledge cutoff:** [latest available]\n* **Allowed source types:** textbooks, style manuals, peer-reviewed, frameworks.\n* **Scope boundaries:** [level, style]\n* **Assumptions:** [thesis constraints]\n\n---\n## Output Format\n(Standard parts as above)."
     },
 
     "study-notes-generator": {
@@ -233,7 +248,8 @@
         { "name": "format", "required": false },
         { "name": "key_concepts", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Learning coach & productivity expert]\\n**Tone:** [{{tone}}]\\n**Authority:** [Cognitive psychology, spaced repetition, retrieval practice]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused note-structuring methods for: {{user_input}}.\n2. **Filter:** Exclude: [rote summaries, long walls of text]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** methods.\n5. **Validate:** Cite credible source type (textbook/framework/meta-analysis) + year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` where needed.\n\n---\n## Context / Source rules\n* **Knowledge cutoff:** [latest available]\n* **Allowed source types:** peer-reviewed, textbooks, frameworks.\n* **Scope boundaries:** [level, depth]\n* **Assumptions:** [study schedule]\n\n---\n## Output Format\n(Standard parts as above)."
     },
 
     "product-description-writer": {
@@ -247,7 +263,8 @@
         { "name": "brand_voice", "required": false },
         { "name": "seo_keywords", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [E-commerce copywriter]\\n**Tone:** [{{tone}}]\\n**Authority:** [Benefit-led messaging, scannability, SEO alignment]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused positioning angles for product: {{user_input}}.\n2. **Filter:** Exclude: [vague claims, keyword stuffing]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** angles.\n5. **Validate:** Cite credible source type (frameworks, analyses) with year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` where needed.\n\n---\n## Context / Source rules\n* **Knowledge cutoff:** [latest available]\n* **Allowed source types:** practitioner frameworks, reputable analyses, textbooks.\n* **Scope boundaries:** [audience, SEO]\n* **Assumptions:** [brand voice]\n\n---\n## Output Format\n(Standard parts as above)."
     },
 
     "sales-pitch-creator": {
@@ -261,7 +278,8 @@
         { "name": "objections", "required": false },
         { "name": "cta", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Sales strategist]\\n**Tone:** [{{tone}}]\\n**Authority:** [Discovery-to-close messaging, objection handling]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused pitch framings for: {{user_input}}.\n2. **Filter:** Exclude: [generic value props, overpromises]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** framings.\n5. **Validate:** Cite credible source type (sales frameworks, practitioner blogs) + year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** `⚠️` where needed.\n\n---\n## Context / Source rules & Output\n(Standard parts as above)."
     },
 
     "press-release-writer": {
@@ -276,7 +294,8 @@
         { "name": "media_contact", "required": false },
         { "name": "date", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [PR manager]\\n**Tone:** [{{tone}}]\\n**Authority:** [AP style, media relations, narrative focus]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused PR angles for: {{user_input}}.\n2. **Filter:** Exclude: [inflated claims, jargon]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** angles.\n5. **Validate:** Source type (PR handbooks, practitioner analyses) + year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` where needed.\n\n---\n## Context / Source rules & Output\n(Standard parts as above)."
     },
 
     "landing-page-copywriter": {
@@ -290,7 +309,8 @@
         { "name": "brand_voice", "required": false },
         { "name": "constraints", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Conversion copywriter]\\n**Tone:** [{{tone}}]\\n**Authority:** [Heuristic evaluation, clarity, and persuasion]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused page-structure strategies for: {{user_input}}.\n2. **Filter:** Exclude: [unsubstantiated claims, vague benefits]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** structures.\n5. **Validate:** Source type (conversion frameworks, practitioner analyses) + year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` where weak; refine.\n\n---\n## Context / Source rules & Output\n(Standard parts as above)."
     },
 
     "twitter-thread-generator": {
@@ -303,7 +323,8 @@
         { "name": "num_tweets", "required": false },
         { "name": "cta", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Social content strategist]\\n**Tone:** [{{tone}}]\\n**Authority:** [Hook design, pacing, platform constraints]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused thread angles for: {{user_input}}.\n2. **Filter:** Exclude: [bait-and-switch hooks, vague claims]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** angles.\n5. **Validate:** Credible source type (platform guides, practitioner blogs) + year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** `⚠️` if weak; refine.\n\n---\n## Context / Source rules & Output\n(Standard parts as above)."
     },
 
     "linkedin-post-generator": {
@@ -315,7 +336,8 @@
         { "name": "hashtags", "required": false },
         { "name": "cta", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [LinkedIn content strategist]\\n**Tone:** [{{tone}}]\\n**Authority:** [Professional voice, insight density]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused post angles for: {{user_input}}.\n2. **Filter:** Exclude: [vague leadership clichés]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** angles.\n5. **Validate:** Credible source type (platform guidance, practitioner analyses) with year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** `⚠️` where needed.\n\n---\n## Context / Source rules & Output\n(Standard parts as above)."
     },
 
     "facebook-post-generator": {
@@ -328,7 +350,8 @@
         { "name": "cta", "required": false },
         { "name": "constraints", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Facebook marketer]\\n**Tone:** [{{tone}}]\\n**Authority:** [Platform conventions, engagement levers]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused post angles for: {{user_input}}.\n2. **Filter:** Exclude: [spammy phrasing, excessive emoji]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** angles.\n5. **Validate:** Credible source type (platform docs, practitioner blogs).\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` where weak.\n\n---\n## Context / Source rules & Output\n(Standard parts as above)."
     },
 
     "ad-copy-generator": {
@@ -343,7 +366,8 @@
         { "name": "char_limits", "required": false },
         { "name": "cta", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Performance marketer]\\n**Tone:** [{{tone}}]\\n**Authority:** [Channel policies, conversion heuristics]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused ad angles for: {{user_input}} on {{platform}}.\n2. **Filter:** Exclude: [non-compliant phrases, overclaims]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** angles.\n5. **Validate:** Credible source type (policy docs, frameworks, practitioner analyses) with year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` if weak.\n\n---\n## Context / Source rules & Output\n(Standard parts as above)."
     },
 
     "unit-test-generator": {
@@ -357,7 +381,8 @@
         { "name": "edge_cases", "required": false },
         { "name": "constraints", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Test engineer]\\n**Tone:** [{{tone}}]\\n**Authority:** [Deterministic testing, coverage, mocking]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused test suite strategies for the provided code.\n2. **Filter:** Exclude: [flaky patterns, trivial asserts]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** strategies.\n5. **Validate:** Credible source type (framework docs, testing handbooks) + year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` if weak.\n\n---\n## Context / Source rules & Output\n(Standard parts as above)."
     },
 
     "regex-builder": {
@@ -370,7 +395,8 @@
         { "name": "flavor", "required": false },
         { "name": "constraints", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Regex specialist]\\n**Tone:** [{{tone}}]\\n**Authority:** [Pattern design, engine nuances, performance]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused pattern strategies for: {{user_input}}.\n2. **Filter:** Exclude: [catastrophic backtracking risks, flavor-incompatible features]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** patterns.\n5. **Validate:** Credible source (engine docs, textbooks) + year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` where needed.\n\n---\n## Context / Source rules & Output\n(Standard parts as above)."
     },
 
     "bug-fix-explainer": {
@@ -384,7 +410,8 @@
         { "name": "steps_taken", "required": false },
         { "name": "constraints", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Debugging expert]\\n**Tone:** [{{tone}}]\\n**Authority:** [MREs, root cause analysis, remediation]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused diagnostic hypotheses for: {{user_input}}.\n2. **Filter:** Exclude: [irreproducible paths, unsafe changes]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** hypotheses.\n5. **Validate:** Credible source (official docs, standard references) + year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` where needed.\n\n---\n## Context / Source rules & Output\n(Standard parts as above)."
     },
 
     "api-docs-generator": {
@@ -398,7 +425,8 @@
         { "name": "schemas", "required": false },
         { "name": "examples", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Technical writer]\\n**Tone:** [{{tone}}]\\n**Authority:** [Consistency, accuracy, developer experience]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused documentation structures for: {{user_input}}.\n2. **Filter:** Exclude: [incomplete endpoint specs, missing auth flows]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** structures.\n5. **Validate:** Credible source type (spec standards, reputable guides) + year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` where weak; refine.\n\n---\n## Context / Source rules & Output\n(Standard parts as above)."
     },
 
     "logo-design-prompt-generator": {
@@ -412,7 +440,8 @@
         { "name": "usage", "required": false },
         { "name": "constraints", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Brand designer]\\n**Tone:** [{{tone}}]\\n**Authority:** [Identity systems, scalability, contrast]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused logo concept directions for: {{user_input}}.\n2. **Filter:** Exclude: [trend clichés, low-contrast marks]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** directions.\n5. **Validate:** Credible source type (design frameworks, textbooks, practitioner analyses).\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** `⚠️` where needed.\n\n---\n## Context / Source rules & Output\n(Standard parts as above)."
     },
 
     "ui-ux-mockup-prompt-generator": {
@@ -426,7 +455,8 @@
         { "name": "components_states", "required": false },
         { "name": "constraints", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Product designer]\\n**Tone:** [{{tone}}]\\n**Authority:** [IA, component states, accessibility]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused mockup direction hypotheses for: {{user_input}}.\n2. **Filter:** Exclude: [inaccessible patterns, vague flows]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** hypotheses.\n5. **Validate:** Credible source (foundational guides, practitioner analyses) + year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** `⚠️` where needed.\n\n---\n## Context / Source rules & Output\n(Standard parts as above)."
     },
 
     "photography-prompt-generator": {
@@ -442,7 +472,8 @@
         { "name": "color_mood", "required": false },
         { "name": "negative_prompts", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Photography director]\\n**Tone:** [{{tone}}]\\n**Authority:** [Composition, lens & lighting, aesthetic control]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused shot concepts for: {{user_input}}.\n2. **Filter:** Exclude: [generic stock looks, over-processed styles]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** concepts.\n5. **Validate:** Credible source type (handbooks, practitioner guides) + year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** Mark `⚠️` where needed.\n\n---\n## Context / Source rules & Output\n(Standard parts as above)."
     },
 
     "creative-story-writer": {
@@ -457,7 +488,8 @@
         { "name": "themes", "required": false },
         { "name": "length", "required": false },
         { "name": "uploaded_files", "required": false }
-      ]
+      ],
+      "optimized": "# Optimized GPT Prompt Template (Markdown)\n\n## Role\n\n**Persona:** [Fiction writing coach]\\n**Tone:** [{{tone}}]\\n**Authority:** [Narrative structure, character & plot development]\n\n---\n\n## Task (stepwise)\n1. **Longlist:** Generate **10** underused story premises for: {{user_input}}.\n2. **Filter:** Exclude: [overused tropes without subversion]. Constraints: [____].\n3. **Criteria scoring:** 0–5: **Novelty, Efficacy, Feasibility, Weekly time**.\n4. **Shortlist & Rank:** Top **3** premises.\n5. **Validate:** Credible source (craft books, practitioner analyses) + year.\n6. **Output:** Checklist, Table, Ranked summary.\n7. **Self-review:** `⚠️` where needed.\n\n---\n## Context / Source rules & Output\n(Standard parts as above)."
     }
   }
 }
