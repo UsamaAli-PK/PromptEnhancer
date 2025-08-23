@@ -170,45 +170,6 @@ export default PageName;
 - View mode state
 - Extended tools toggle
 
-#### ToolPage
-**Individual tool interface** for specific prompt enhancement tools.
-
-**Route:** `/tool/:toolId`
-**Access:** Protected (authentication required)
-
-**Features:**
-- Tool-specific configuration
-- Input text area
-- File upload support
-- Output formatting options
-- Save and export functionality
-
-**Tool Configuration:**
-- Provider selection (OpenAI, Anthropic, etc.)
-- Model selection (GPT-4, Claude, etc.)
-- Tone and style options
-- Output format selection
-
-**File Upload:**
-- Drag and drop interface
-- Multiple file support
-- Content extraction
-- File validation
-
-**Output Options:**
-- Text format
-- JSON format
-- Markdown format
-- HTML format
-- PDF export
-
-**State Management:**
-- Tool configuration state
-- Input text state
-- File upload state
-- Output state
-- Loading states
-
 #### HybridToolPage
 **Dynamic tool interface** that adapts to different tool types.
 
@@ -221,6 +182,9 @@ export default PageName;
 - Advanced file handling
 - Real-time prompt enhancement
 - Database integration
+- Prompt templates from `prompts.json` (optimized Markdown format)
+- Option B (user API keys) with base URL/model
+- Prompt size/file truncation guards and format-aware downloads
 
 **Dynamic Configuration:**
 - Tool metadata from JSON config
@@ -365,15 +329,14 @@ Pages requiring user authentication and authorization.
 
 **Examples:**
 - `Dashboard` - Main user interface
-- `ToolPage` - Tool-specific interfaces
 - `LibraryPage` - User content management
 - `ProfilePage` - User settings
+- `HybridToolPage` - Universal tool interface
 
 ### 3. Dynamic Pages
 Pages that adapt their content based on route parameters.
 
 **Examples:**
-- `ToolPage` - Tool-specific configuration
 - `HybridToolPage` - Universal tool interface
 
 ## 🔧 Page Development

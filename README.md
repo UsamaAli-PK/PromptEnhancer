@@ -159,30 +159,32 @@ This project is configured for deployment on Bolt hosting platform:
 
 ### Environment Variables
 
-```bash
-# Required
+See `.env.example` and set:
+
+```
 VITE_SUPABASE_URL=your_supabase_project_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 
-# Optional (for API integration)
-VITE_OPENAI_API_KEY=your_openai_key
-VITE_ANTHROPIC_API_KEY=your_anthropic_key
+# Optional: dev-only shared keys (Option B uses per-user keys at runtime)
+VITE_OPENAI_API_KEY=
+VITE_ANTHROPIC_API_KEY=
 ```
 
 ## 📊 Performance
 
-- **Lazy Loading**: Components loaded on demand
-- **Code Splitting**: Automatic bundle optimization
-- **Image Optimization**: Responsive images with proper sizing
-- **Database Indexing**: Optimized queries with proper indexes
+- **Route-based lazy loading** for main pages
+- **Code splitting** via React.lazy
+- **Prompt size guards** to avoid oversized requests
+- **Database indexing** for prompt queries
 - **Caching**: User settings and preferences cached locally
 
 ## 🔒 Security
 
 - **Row Level Security**: Database-level access control
 - **Authentication**: Secure user authentication via Supabase
-- **Input Validation**: Client and server-side validation
-- **API Security**: Secure API key management
+- **User API Keys (Option B)** stored client-side encrypted; deletable in Profile
+- **Supabase credentials** moved to env vars
+- **Input Validation** and prompt-size guards
 - **HTTPS**: All communications encrypted
 
 ## 🤝 Contributing
@@ -242,9 +244,10 @@ VITE_ANTHROPIC_API_KEY=your_anthropic_key
 - [x] Basic UI components
 
 ### Phase 2: AI Integration 🚧
-- [ ] Real API provider connections
-- [ ] Prompt template system
-- [ ] Response optimization
+- [x] Prompt template system (`src/config/prompts.json`, optimized Markdown)
+- [x] Option B (user API keys) wired in `HybridToolPage`
+- [x] Input/file guards with truncation markers
+- [x] Format-aware downloads (json/csv/html/sql/md/txt)
 - [ ] Cost tracking
 
 ### Phase 3: Advanced Features 📋

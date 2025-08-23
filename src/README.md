@@ -66,7 +66,7 @@ The `components/` folder contains reusable UI components used throughout the app
 
 **Key Components:**
 - **Navbar** - Main navigation component
-- **HybridToolPage** - Dynamic tool interface
+- **HybridToolPage** - Universal tool interface (replaces legacy ToolPage)
 - **FileUpload** - File handling component
 - **ApiKeyManager** - API key management
 - **ErrorBoundary** - Error handling wrapper
@@ -81,7 +81,6 @@ The `pages/` folder contains page-level components that represent different rout
 - **LandingPage** - Public landing page with features
 - **Dashboard** - Main user dashboard with tools
 - **AuthPage** - Sign in/sign up forms
-- **ToolPage** - Individual tool interface
 - **LibraryPage** - Saved prompts management
 - **ProfilePage** - User settings and preferences
 - **NotFoundPage** - 404 error page
@@ -118,7 +117,8 @@ The `config/` folder contains configuration files for tools and settings.
 
 **Configuration Files:**
 - **tools.json** - 40+ tool definitions with metadata
-- **toolConfig.json** - Legacy tool configuration (deprecated)
+- **prompts.json** - Per-tool prompt templates (system/user + optimized Markdown)
+- **toolConfig.json** - Legacy (deprecated) — kept only for reference; not used
 
 ## 📁 Utils Directory
 
@@ -156,6 +156,10 @@ The `utils/` folder contains utility functions and helpers.
 - **User-Friendly Error Messages**
 - **Fallback UI** for error states
 
+### 5. Prompt Safety & Exports
+- **Token/Size Guards** for input and files with truncation markers
+- **Format-Aware Downloads** (json/csv/html/sql/md/txt)
+
 ## 🔒 Security Features
 
 ### Authentication
@@ -169,6 +173,8 @@ The `utils/` folder contains utility functions and helpers.
 - **Input Validation** and sanitization
 - **Secure Storage** of sensitive data
 - **HTTPS** enforcement
+- **User-Provided API Keys (Option B)** stored in DB (client-side encrypted)
+- **Supabase Env Vars** moved to `.env`
 
 ## 📱 Responsive Design
 
